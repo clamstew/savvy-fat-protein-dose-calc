@@ -7,36 +7,76 @@ import {
   calcInsulinDose,
   calcDuration,
 } from "./business-logic";
+import useDarkMode from "use-dark-mode";
 
-const AppWrapper = styled.div({
-  color: "#FFF",
-  backgroundColor: "#000",
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
+const AppWrapper = styled.div(({ darkMode }) => {
+  const styles = {
+    color: "#000",
+    backgroundColor: "#FFF",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
+
+  if (darkMode) {
+    styles.color = "#FFF";
+    styles.backgroundColor = "#000";
+  }
+
+  return styles;
 });
 
 const Header = styled.div({
   fontSize: 24,
+  fontWeight: "bold",
+  textAlign: "center",
 });
+
+const InputWrapper = styled.div({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  height: 66,
+  margin: "5px 20px",
+});
+
+const InputLabel = styled.label({});
 
 const InputNumber = styled.input({
   height: 40,
-  margin: 12,
+  textAlign: "center",
   borderWidth: 1,
   padding: 10,
   fontSize: 24,
+  width: "90%",
 });
 
-const OutputText = styled.div({
-  fontSize: 24,
-  borderBottom: "1px solid white",
-  padding: "10px 0",
+const OutputText = styled.div(({ darkMode }) => {
+  const styles = {
+    fontSize: 24,
+    borderBottom: "1px solid #000",
+    padding: "10px 24px",
+  };
+
+  if (darkMode) {
+    styles.borderBottom = "1px solid #FFF";
+  }
+
+  return styles;
+});
+
+const OutputValue = styled.span({
+  display: "inline-block",
+  float: "right",
+  fontWeight: 800,
 });
 
 function App() {
+  const { value: darkMode } = useDarkMode(true);
+  console.warn("darkMode", darkMode);
+
   const [fat, setFat] = useState(20);
   const [protein, setProtein] = useState(30);
   const [icr, setIcr] = useState(30);
@@ -48,38 +88,51 @@ function App() {
   const duration = calcDuration(ckal);
 
   return (
-    <AppWrapper>
-      <Header>Fat protein dose</Header>
-      <div>Fat: {fat}</div>
-      <div>
+    <AppWrapper darkMode={darkMode}>
+      <Header>Fat protein dose calc</Header>
+      <InputWrapper>
+        <InputLabel htmlFor="fat">Fat: {fat}</InputLabel>
         <InputNumber
+          id="fat"
           type="number"
           defaultValue={fat}
           onChange={(e) => setFat(e.target.value)}
         />
-      </div>
-      <div>Protein: {protein}</div>
-      <div>
+      </InputWrapper>
+      <InputWrapper>
+        <InputLabel htmlFor="protein">Protein: {protein}</InputLabel>
         <InputNumber
+          id="protein"
           type="number"
           defaultValue={protein}
           onChange={(e) => setProtein(e.target.value)}
         />
-      </div>
-      <div>ICR: 1 unit per {icr}</div>
-      <div>
+      </InputWrapper>
+      <InputWrapper>
+        <InputLabel htmlFor="icr">ICR: 1 unit per {icr}</InputLabel>
         <InputNumber
+          id="icr"
           type="number"
           defaultValue={fat}
           onChange={(e) => setIcr(e.target.value)}
         />
-      </div>
+      </InputWrapper>
 
-      <OutputText>FPU: {fatProteinUnit}</OutputText>
-      <OutputText>ckal: {ckal}</OutputText>
-      <OutputText>Carb Convertion: {carbConversion}</OutputText>
-      <OutputText>Insulin Dose: {insulinDose}</OutputText>
-      <OutputText>Duration: {duration}</OutputText>
+      <OutputText darkMode={darkMode}>
+        FPU<OutputValue>{fatProteinUnit}</OutputValue>
+      </OutputText>
+      <OutputText darkMode={darkMode}>
+        ckal<OutputValue>{ckal}</OutputValue>
+      </OutputText>
+      <OutputText darkMode={darkMode}>
+        Carb Convertion<OutputValue>{carbConversion}</OutputValue>
+      </OutputText>
+      <OutputText darkMode={darkMode}>
+        Insulin Dose<OutputValue>{insulinDose}</OutputValue>
+      </OutputText>
+      <OutputText darkMode={darkMode}>
+        Duration<OutputValue>{duration}</OutputValue>
+      </OutputText>
     </AppWrapper>
   );
 }
