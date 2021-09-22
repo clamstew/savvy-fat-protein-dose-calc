@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "fat-protein-dosage-calc",
+  "name": "Fat Protein Dosage Calculator",
   "icons": [
     {
       "src": "favicon.ico",
