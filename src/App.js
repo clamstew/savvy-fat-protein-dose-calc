@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "@emotion/styled";
+import { Global, css } from "@emotion/react";
 import {
   calcFatProteinUnit,
   calcCKal,
@@ -8,6 +9,7 @@ import {
   calcDuration,
 } from "./business-logic";
 import useDarkMode from "use-dark-mode";
+import { MdInput } from "./components/MdInput";
 
 const AppWrapper = styled.div(({ darkMode }) => {
   const styles = {
@@ -98,7 +100,6 @@ const Button = styled.button(({ darkMode }) => {
 
 function App() {
   const { value: darkMode } = useDarkMode(true);
-  console.warn("darkMode", darkMode);
 
   const fatInput = useRef(null);
   const proteinInput = useRef(null);
@@ -126,15 +127,69 @@ function App() {
 
   return (
     <AppWrapper darkMode={darkMode}>
+      <Global
+        styles={css`
+          ::-webkit-input-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          :-moz-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          ::-moz-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          :-ms-input-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+
+          input:focus ::-webkit-input-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus :-moz-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus ::-moz-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus :-ms-input-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+        `}
+      />
       <Header>🩸🧮 Fat protein dose</Header>
       <InputWrapper>
-        <InputLabel htmlFor="fat">Fat: {fat}</InputLabel>
+        {/*        <InputLabel htmlFor="fat">Fat: {fat}</InputLabel>
         <InputNumber
           id="fat"
           ref={fatInput}
           type="number"
           value={fat}
           onChange={setFatInput}
+        />*/}
+        <MdInput
+          id={"fat"}
+          ref={fatInput}
+          type={"number"}
+          value={fat}
+          onChange={setFatInput}
+          placeholder={"enter grams"}
+          labelText={`Fat`}
         />
       </InputWrapper>
       <InputWrapper>
