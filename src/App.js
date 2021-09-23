@@ -44,16 +44,16 @@ const InputWrapper = styled.div({
   margin: "5px 20px",
 });
 
-const InputLabel = styled.label({});
+// const InputLabel = styled.label({});
 
-const InputNumber = styled.input({
-  height: 40,
-  textAlign: "center",
-  borderWidth: 1,
-  padding: 10,
-  fontSize: 24,
-  width: "90%",
-});
+// const InputNumber = styled.input({
+//   height: 40,
+//   textAlign: "center",
+//   borderWidth: 1,
+//   padding: 10,
+//   fontSize: 24,
+//   width: "90%",
+// });
 
 const OutputText = styled.div(({ darkMode }) => {
   const styles = {
@@ -193,23 +193,41 @@ function App() {
         />
       </InputWrapper>
       <InputWrapper>
-        <InputLabel htmlFor="protein">Protein: {protein}</InputLabel>
+        {/*      <InputLabel htmlFor="protein">Protein: {protein}</InputLabel>
         <InputNumber
           id="protein"
           ref={proteinInput}
           type="number"
           value={protein}
           onChange={setProteinInput}
+        />*/}
+        <MdInput
+          id={"protein"}
+          ref={proteinInput}
+          type={"number"}
+          value={protein}
+          onChange={setProteinInput}
+          placeholder={"enter grams"}
+          labelText={`Protein`}
         />
       </InputWrapper>
       <InputWrapper>
-        <InputLabel htmlFor="icr">ICR: 1 unit per {icr}</InputLabel>
+        {/*    <InputLabel htmlFor="icr">ICR: 1 unit per {icr}</InputLabel>
         <InputNumber
           id="icr"
           ref={icrInput}
           type="number"
           value={icr}
           onChange={setIcrInput}
+        />*/}
+        <MdInput
+          id={"icr"}
+          ref={icrInput}
+          type={"number"}
+          value={icr}
+          onChange={setIcrInput}
+          placeholder={"1 unit per"}
+          labelText={`ICR`}
         />
       </InputWrapper>
 
