@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
+import { Global, css } from "@emotion/react";
 import useDarkMode from "use-dark-mode";
 
 const FormGroup = styled.div({
@@ -93,6 +94,51 @@ export const MdInput = React.forwardRef((props, ref) => {
 
   return (
     <FormGroup>
+      <Global
+        styles={css`
+          ::-webkit-input-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          :-moz-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          ::-moz-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+          :-ms-input-placeholder {
+            text-align: right;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 200;
+          }
+
+          input:focus ::-webkit-input-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus :-moz-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus ::-moz-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+          input:focus :-ms-input-placeholder {
+            color: transparent;
+            font-size: 0;
+          }
+        `}
+      />
       <Input darkMode={darkMode} ref={ref} {...props} required />
       <Label darkMode={darkMode} htmlFor={props.id}>
         {props.labelText}
