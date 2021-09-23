@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "@emotion/styled";
-import { Global, css } from "@emotion/react";
+// import { Global, css } from "@emotion/react";
 import {
   calcFatProteinUnit,
   calcCKal,
@@ -44,16 +44,28 @@ const InputWrapper = styled.div({
   margin: "5px 20px",
 });
 
-// const InputLabel = styled.label({});
+const ResultsSectionWrapper = styled.div({
+  /*
+  // https://blog.hubspot.com/website/css-fade-in
+  .fade-in-text {
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 150px;
+  color: black;
+  animation: fadeIn linear 7s;
+  -webkit-animation: fadeIn linear 7s;
+  -moz-animation: fadeIn linear 7s;
+  -o-animation: fadeIn linear 7s;
+  -ms-animation: fadeIn linear 7s;
+}
 
-// const InputNumber = styled.input({
-//   height: 40,
-//   textAlign: "center",
-//   borderWidth: 1,
-//   padding: 10,
-//   fontSize: 24,
-//   width: "90%",
-// });
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+   */
+});
 
 const OutputText = styled.div(({ darkMode }) => {
   const styles = {
@@ -105,9 +117,9 @@ function App() {
   const proteinInput = useRef(null);
   const icrInput = useRef(null);
 
-  const [fat, setFat] = useState(20);
-  const [protein, setProtein] = useState(30);
-  const [icr, setIcr] = useState(30);
+  const [fat, setFat] = useState("");
+  const [protein, setProtein] = useState("");
+  const [icr, setIcr] = useState("");
 
   const fatProteinUnit = calcFatProteinUnit(fat, protein);
   const ckal = calcCKal(fatProteinUnit);
@@ -127,61 +139,8 @@ function App() {
 
   return (
     <AppWrapper darkMode={darkMode}>
-      <Global
-        styles={css`
-          ::-webkit-input-placeholder {
-            text-align: right;
-            color: #ddd;
-            font-size: 13px;
-            font-weight: 200;
-          }
-          :-moz-placeholder {
-            text-align: right;
-            color: #ddd;
-            font-size: 13px;
-            font-weight: 200;
-          }
-          ::-moz-placeholder {
-            text-align: right;
-            color: #ddd;
-            font-size: 13px;
-            font-weight: 200;
-          }
-          :-ms-input-placeholder {
-            text-align: right;
-            color: #ddd;
-            font-size: 13px;
-            font-weight: 200;
-          }
-
-          input:focus ::-webkit-input-placeholder {
-            color: transparent;
-            font-size: 0;
-          }
-          input:focus :-moz-placeholder {
-            color: transparent;
-            font-size: 0;
-          }
-          input:focus ::-moz-placeholder {
-            color: transparent;
-            font-size: 0;
-          }
-          input:focus :-ms-input-placeholder {
-            color: transparent;
-            font-size: 0;
-          }
-        `}
-      />
       <Header>🩸🧮 Fat protein dose</Header>
       <InputWrapper>
-        {/*        <InputLabel htmlFor="fat">Fat: {fat}</InputLabel>
-        <InputNumber
-          id="fat"
-          ref={fatInput}
-          type="number"
-          value={fat}
-          onChange={setFatInput}
-        />*/}
         <MdInput
           id={"fat"}
           ref={fatInput}
@@ -193,14 +152,6 @@ function App() {
         />
       </InputWrapper>
       <InputWrapper>
-        {/*      <InputLabel htmlFor="protein">Protein: {protein}</InputLabel>
-        <InputNumber
-          id="protein"
-          ref={proteinInput}
-          type="number"
-          value={protein}
-          onChange={setProteinInput}
-        />*/}
         <MdInput
           id={"protein"}
           ref={proteinInput}
@@ -212,14 +163,6 @@ function App() {
         />
       </InputWrapper>
       <InputWrapper>
-        {/*    <InputLabel htmlFor="icr">ICR: 1 unit per {icr}</InputLabel>
-        <InputNumber
-          id="icr"
-          ref={icrInput}
-          type="number"
-          value={icr}
-          onChange={setIcrInput}
-        />*/}
         <MdInput
           id={"icr"}
           ref={icrInput}
@@ -231,27 +174,29 @@ function App() {
         />
       </InputWrapper>
 
-      <OutputText darkMode={darkMode}>
-        FPU<OutputValue>{fatProteinUnit}</OutputValue>
-      </OutputText>
-      <OutputText darkMode={darkMode}>
-        ckal<OutputValue>{ckal}</OutputValue>
-      </OutputText>
-      <OutputText darkMode={darkMode}>
-        Carb Convertion<OutputValue>{carbConversion}</OutputValue>
-      </OutputText>
-      <OutputText darkMode={darkMode}>
-        Insulin Dose<OutputValue>{insulinDose}</OutputValue>
-      </OutputText>
-      <OutputText darkMode={darkMode}>
-        Duration<OutputValue>{duration}</OutputValue>
-      </OutputText>
+      <ResultsSectionWrapper>
+        <OutputText darkMode={darkMode}>
+          FPU<OutputValue>{fatProteinUnit}</OutputValue>
+        </OutputText>
+        <OutputText darkMode={darkMode}>
+          ckal<OutputValue>{ckal}</OutputValue>
+        </OutputText>
+        <OutputText darkMode={darkMode}>
+          Carb Convertion<OutputValue>{carbConversion}</OutputValue>
+        </OutputText>
+        <OutputText darkMode={darkMode}>
+          Insulin Dose<OutputValue>{insulinDose}</OutputValue>
+        </OutputText>
+        <OutputText darkMode={darkMode}>
+          Duration<OutputValue>{duration}</OutputValue>
+        </OutputText>
 
-      <InputWrapper>
-        <Button onClick={clearInputs} darkMode={darkMode}>
-          Clear
-        </Button>
-      </InputWrapper>
+        <InputWrapper>
+          <Button onClick={clearInputs} darkMode={darkMode}>
+            Clear
+          </Button>
+        </InputWrapper>
+      </ResultsSectionWrapper>
     </AppWrapper>
   );
 }
