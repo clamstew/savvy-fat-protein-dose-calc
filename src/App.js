@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styled from "@emotion/styled";
 import {
   calcFatProteinUnit,
@@ -73,9 +73,36 @@ const OutputValue = styled.span({
   fontWeight: 800,
 });
 
+const Button = styled.button(({ darkMode }) => {
+  const styles = {
+    border: "none",
+    background: "grey",
+    color: "white",
+    fontWeight: "bold",
+    width: "90%",
+    height: 50,
+    borderRadius: 10,
+    padding: 10,
+    cursor: "pointer",
+    "&:active": {
+      transform: "translateY(2px)",
+    },
+  };
+
+  if (darkMode) {
+    styles.color = "#FFF";
+    styles.backgroundColor = "grey";
+  }
+  return styles;
+});
+
 function App() {
   const { value: darkMode } = useDarkMode(true);
   console.warn("darkMode", darkMode);
+
+  const fatInput = useRef(null);
+  const proteinInput = useRef(null);
+  const icrInput = useRef(null);
 
   const [fat, setFat] = useState(20);
   const [protein, setProtein] = useState(30);
@@ -87,34 +114,47 @@ function App() {
   const insulinDose = calcInsulinDose(icr, carbConversion);
   const duration = calcDuration(ckal);
 
+  const setFatInput = (e) => setFat(e.target.value);
+  const setProteinInput = (e) => setProtein(e.target.value);
+  const setIcrInput = (e) => setIcr(e.target.value);
+
+  const clearInputs = () => {
+    setFat("");
+    setProtein("");
+    setIcr("");
+  };
+
   return (
     <AppWrapper darkMode={darkMode}>
-      <Header>Fat protein dose calc</Header>
+      <Header>🩸🧮 Fat protein dose</Header>
       <InputWrapper>
         <InputLabel htmlFor="fat">Fat: {fat}</InputLabel>
         <InputNumber
           id="fat"
+          ref={fatInput}
           type="number"
-          defaultValue={fat}
-          onChange={(e) => setFat(e.target.value)}
+          value={fat}
+          onChange={setFatInput}
         />
       </InputWrapper>
       <InputWrapper>
         <InputLabel htmlFor="protein">Protein: {protein}</InputLabel>
         <InputNumber
           id="protein"
+          ref={proteinInput}
           type="number"
-          defaultValue={protein}
-          onChange={(e) => setProtein(e.target.value)}
+          value={protein}
+          onChange={setProteinInput}
         />
       </InputWrapper>
       <InputWrapper>
         <InputLabel htmlFor="icr">ICR: 1 unit per {icr}</InputLabel>
         <InputNumber
           id="icr"
+          ref={icrInput}
           type="number"
-          defaultValue={fat}
-          onChange={(e) => setIcr(e.target.value)}
+          value={icr}
+          onChange={setIcrInput}
         />
       </InputWrapper>
 
@@ -133,6 +173,12 @@ function App() {
       <OutputText darkMode={darkMode}>
         Duration<OutputValue>{duration}</OutputValue>
       </OutputText>
+
+      <InputWrapper>
+        <Button onClick={clearInputs} darkMode={darkMode}>
+          Clear
+        </Button>
+      </InputWrapper>
     </AppWrapper>
   );
 }
