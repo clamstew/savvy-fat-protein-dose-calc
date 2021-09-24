@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Global, css } from "@emotion/react";
-import useDarkMode from "use-dark-mode";
+// import useDarkMode from "use-dark-mode";
 
 const FormGroup = styled.div({
   marginLeft: "auto",
@@ -90,7 +90,8 @@ const Label = styled.label(({ darkMode }) => {
 });
 
 export const MdInput = React.forwardRef((props, ref) => {
-  const { value: darkMode } = useDarkMode(true);
+  // const { value: darkMode } = useDarkMode(true);
+  const darkMode = true;
 
   return (
     <FormGroup>
