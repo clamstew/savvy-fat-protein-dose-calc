@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import styled from "@emotion/styled";
-// import { jsx, css, keyframes } from "@emotion/react";
 import {
   calcFatProteinUnit,
   calcCKal,
@@ -8,7 +7,7 @@ import {
   calcInsulinDose,
   calcDuration,
 } from "./business-logic";
-import useDarkMode from "use-dark-mode";
+// import useDarkMode from "use-dark-mode";
 import { MdInput } from "./components/MdInput";
 
 const AppWrapper = styled.div(({ darkMode }) => {
@@ -120,7 +119,8 @@ const Button = styled.button(({ darkMode }) => {
 let hasRunOnce = false;
 
 function App() {
-  const { value: darkMode } = useDarkMode(true);
+  // const { value: darkMode } = useDarkMode(true);
+  const darkMode = true;
 
   const fatInput = useRef(null);
   const proteinInput = useRef(null);
@@ -158,6 +158,7 @@ function App() {
         <MdInput
           id={"fat"}
           ref={fatInput}
+          inputmode={"numeric"}
           type={"number"}
           value={fat}
           onChange={setFatInput}
@@ -169,6 +170,7 @@ function App() {
         <MdInput
           id={"protein"}
           ref={proteinInput}
+          inputmode={"numeric"}
           type={"number"}
           value={protein}
           onChange={setProteinInput}
@@ -180,6 +182,7 @@ function App() {
         <MdInput
           id={"icr"}
           ref={icrInput}
+          inputmode={"numeric"}
           type={"number"}
           value={icr}
           onChange={setIcrInput}
