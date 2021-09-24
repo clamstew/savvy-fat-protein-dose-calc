@@ -9,6 +9,18 @@ import {
 } from "./business-logic";
 // import useDarkMode from "use-dark-mode";
 import { MdInput } from "./components/MdInput";
+import { Button } from "./components/Button";
+import { ButtonLink } from "./components/ButtonLink";
+import { Terms } from "./components/Terms";
+
+const ViewWrapper = styled.div({
+  background: "black",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  posistion: "absolute",
+});
 
 const AppWrapper = styled.div(({ darkMode, showTerms }) => {
   const styles = {
@@ -101,103 +113,6 @@ const OutputValue = styled.span({
   fontWeight: 800,
 });
 
-const Button = styled.button(({ darkMode }) => {
-  const styles = {
-    border: "none",
-    background: "grey",
-    color: "white",
-    fontWeight: "bold",
-    width: "90%",
-    height: 50,
-    borderRadius: 10,
-    padding: 10,
-    cursor: "pointer",
-    "&:active": {
-      transform: "translateY(2px)",
-    },
-  };
-
-  if (darkMode) {
-    styles.color = "#FFF";
-    styles.backgroundColor = "grey";
-  }
-  return styles;
-});
-
-const ButtonLink = styled.button({
-  color: "white",
-  textDecoration: "underline",
-  outline: "none",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-});
-
-function Terms({ hideTerms }) {
-  return (
-    <div
-      style={{
-        posistion: "absolute",
-        top: 0,
-        botom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        background: "black",
-        color: "white",
-      }}
-    >
-      <div style={{ margin: "0 auto", maxWidth: 500 }}>
-        <h1>Legal Disclaimer</h1>
-        <p>
-          All information on this site is intended for entertainment purposes
-          only. All reasonable efforts have been made to ensure that the
-          accuracy of the calculations of fat-protein.netlify.app at the time of
-          preparation. Calculated results presented are believed to be reliable
-          but is subject to change at any time, and without notice.
-        </p>
-
-        <p>
-          The fat-protein.netlify.app website may contain links to third party
-          websites which are not under the control of fat-protein.netlify.app.
-          These links do not indicate explicit or implicit any endorsement,
-          approval, recommendation or preference of those third party websites
-          or the products and services provided on them. Any use of or access to
-          those third party websites or their products and services is solely at
-          your own risk.
-        </p>
-
-        <p>
-          Unless provided otherwise in this Disclaimer, the information on the
-          fat-protein.netlify.app website is provided to you on an “AS IS”, “AS
-          AVAILABLE” basis without any express or implied warranty of any kind
-          and is provided for a general, indicative purpose only. In particular,
-          the company does not make any express or implied warranty as to the
-          accuracy, fitness for a particular purpose, non-infringement,
-          reliability, security, timeliness, completeness or freedom from
-          computer virus in relation to such contents. The company accepts no
-          liability, obligation or responsibility whatsoever for any loss,
-          destruction or damage arising directly or indirectly from or inspect
-          of the use of or misuse of or reliance on, any information contained
-          on this website or for any inaccuracies, errors omissions,
-          misstatements or misrepresentations (whether express or implied) of
-          any information relating to the Company.
-        </p>
-
-        <p>
-          By accessing the fat-protein.netlify.app website or any of its
-          webpages, you unconditionally agree to the terms of this Disclaimer
-          and as they may be modified and/or supplemented from time to time by
-          the company without prior notice to you. Please check this webpage
-          regularly for any modifications and/or supplements which may be made.
-        </p>
-
-        <ButtonLink onClick={() => hideTerms()}>Back</ButtonLink>
-      </div>
-    </div>
-  );
-}
-
 let hasRunOnce = false;
 
 function App() {
@@ -205,19 +120,23 @@ function App() {
   // const { value: darkMode } = useDarkMode(true);
   const darkMode = true;
 
+  // Input Refs
   const fatInput = useRef(null);
   const proteinInput = useRef(null);
   const icrInput = useRef(null);
 
+  // State
   const [fat, setFat] = useState("");
   const [protein, setProtein] = useState("");
   const [icr, setIcr] = useState("");
 
+  // throttle results from fade out on load
   const allInputsHaveData = fat && protein && icr;
   if (allInputsHaveData) {
     hasRunOnce = true;
   }
 
+  // calculate output
   const fatProteinUnit = calcFatProteinUnit(fat, protein);
   const ckal = calcCKal(fatProteinUnit);
   const carbConversion = calcCarbConversion(fatProteinUnit);
@@ -235,16 +154,7 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        background: "black",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        posistion: "absolute",
-      }}
-    >
+    <ViewWrapper>
       {showTerms && <Terms hideTerms={() => setShowTerms(false)} />}
       <AppWrapper darkMode={darkMode} showTerms={showTerms}>
         <Header>🩸🧮 Fat protein dose</Header>
@@ -321,7 +231,7 @@ function App() {
           </ButtonLink>
         </div>
       </AppWrapper>
-    </div>
+    </ViewWrapper>
   );
 }
 
