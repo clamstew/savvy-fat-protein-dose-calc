@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "@emotion/styled";
-// import { Global, css } from "@emotion/react";
+// import { jsx, css, keyframes } from "@emotion/react";
 import {
   calcFatProteinUnit,
   calcCKal,
@@ -44,28 +44,35 @@ const InputWrapper = styled.div({
   margin: "5px 20px",
 });
 
-const ResultsSectionWrapper = styled.div({
-  /*
-  // https://blog.hubspot.com/website/css-fade-in
-  .fade-in-text {
-  display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 150px;
-  color: black;
-  animation: fadeIn linear 7s;
-  -webkit-animation: fadeIn linear 7s;
-  -moz-animation: fadeIn linear 7s;
-  -o-animation: fadeIn linear 7s;
-  -ms-animation: fadeIn linear 7s;
-}
+const ResultsSectionWrapper = styled.div(
+  ({ allInputsHaveData, hasRunOnce }) => {
+    const fadeOut = {
+      visibility: "hidden",
+      opacity: 0,
+      transition: "visibility 0s 0.3s, opacity 0.3s ease-in-out",
+    };
 
-@keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
-}
+    const fadeIn = {
+      visibility: "visible",
+      opacity: 1,
+      transition: "opacity 0.3s ease-in-out",
+    };
 
-   */
-});
+    let styles = {
+      ...fadeOut,
+    };
+
+    if (hasRunOnce && allInputsHaveData) {
+      styles = { ...fadeIn };
+    }
+
+    if (hasRunOnce && !allInputsHaveData) {
+      styles = { ...fadeOut };
+    }
+
+    return styles;
+  }
+);
 
 const OutputText = styled.div(({ darkMode }) => {
   const styles = {
@@ -110,6 +117,8 @@ const Button = styled.button(({ darkMode }) => {
   return styles;
 });
 
+let hasRunOnce = false;
+
 function App() {
   const { value: darkMode } = useDarkMode(true);
 
@@ -120,6 +129,11 @@ function App() {
   const [fat, setFat] = useState("");
   const [protein, setProtein] = useState("");
   const [icr, setIcr] = useState("");
+
+  const allInputsHaveData = fat && protein && icr;
+  if (allInputsHaveData) {
+    hasRunOnce = true;
+  }
 
   const fatProteinUnit = calcFatProteinUnit(fat, protein);
   const ckal = calcCKal(fatProteinUnit);
@@ -174,7 +188,10 @@ function App() {
         />
       </InputWrapper>
 
-      <ResultsSectionWrapper>
+      <ResultsSectionWrapper
+        hasRunOnce={hasRunOnce}
+        allInputsHaveData={allInputsHaveData}
+      >
         <OutputText darkMode={darkMode}>
           FPU<OutputValue>{fatProteinUnit}</OutputValue>
         </OutputText>
