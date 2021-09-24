@@ -124,6 +124,15 @@ const Button = styled.button(({ darkMode }) => {
   return styles;
 });
 
+const ButtonLink = styled.button({
+  color: "white",
+  textDecoration: "underline",
+  outline: "none",
+  background: "none",
+  border: "none",
+  cursor: "pointer",
+});
+
 function Terms({ hideTerms }) {
   return (
     <div
@@ -183,9 +192,7 @@ function Terms({ hideTerms }) {
           regularly for any modifications and/or supplements which may be made.
         </p>
 
-        <a style={{ color: "white" }} href="#" onClick={() => hideTerms()}>
-          Back
-        </a>
+        <ButtonLink onClick={() => hideTerms()}>Back</ButtonLink>
       </div>
     </div>
   );
@@ -306,13 +313,12 @@ function App() {
         </ResultsSectionWrapper>
 
         <div style={{ textAlign: "center" }}>
-          <a
-            style={{ color: "white", fontSize: 9 }}
-            href="#"
+          <ButtonLink
+            style={{ fontSize: 9 }}
             onClick={() => setShowTerms(true)}
           >
             Terms & Conditions
-          </a>
+          </ButtonLink>
         </div>
       </AppWrapper>
     </div>
