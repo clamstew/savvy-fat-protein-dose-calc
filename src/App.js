@@ -11,19 +11,28 @@ import {
 import { MdInput } from "./components/MdInput";
 import { Button } from "./components/Button";
 import { ButtonLink } from "./components/ButtonLink";
+import { InputWrapper } from "./components/InputWrapper";
+import { ResultsViewer } from "./components/Results";
+// modals
 import { Terms } from "./components/Terms";
 
 const ViewWrapper = styled.div({
+  label: "ViewWrapper",
   background: "black",
   top: 0,
   bottom: 0,
   left: 0,
   right: 0,
-  posistion: "absolute",
+  position: "absolute",
+  // //
+  // display: "flex",
+  // minHeight: "100vh",
+  // flexDirection: "column",
 });
 
 const AppWrapper = styled.div(({ darkMode, showTerms }) => {
   const styles = {
+    label: "AppWrapper",
     color: "#000",
     zIndex: 0,
     backgroundColor: "#FFF",
@@ -48,69 +57,15 @@ const AppWrapper = styled.div(({ darkMode, showTerms }) => {
 });
 
 const Header = styled.div({
+  label: "Header",
   fontSize: 24,
   fontWeight: "bold",
   textAlign: "center",
 });
 
-const InputWrapper = styled.div({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: 66,
-  margin: "5px 20px",
-});
-
-const ResultsSectionWrapper = styled.div(
-  ({ allInputsHaveData, hasRunOnce }) => {
-    const fadeOut = {
-      visibility: "hidden",
-      opacity: 0,
-      transition: "visibility 0s 0.3s, opacity 0.3s ease-in-out",
-    };
-
-    const fadeIn = {
-      visibility: "visible",
-      opacity: 1,
-      transition: "opacity 0.3s ease-in-out",
-    };
-
-    let styles = {
-      ...fadeOut,
-      maxWidth: 600,
-      margin: "0 auto",
-    };
-
-    if (hasRunOnce && allInputsHaveData) {
-      styles = { ...fadeIn, maxWidth: 600, margin: "0 auto" };
-    }
-
-    if (hasRunOnce && !allInputsHaveData) {
-      styles = { ...fadeOut, maxWidth: 600, margin: "0 auto" };
-    }
-
-    return styles;
-  }
-);
-
-const OutputText = styled.div(({ darkMode }) => {
-  const styles = {
-    fontSize: 24,
-    borderBottom: "1px solid #000",
-    padding: "10px 24px",
-  };
-
-  if (darkMode) {
-    styles.borderBottom = "1px solid #FFF";
-  }
-
-  return styles;
-});
-
-const OutputValue = styled.span({
-  display: "inline-block",
-  float: "right",
-  fontWeight: 800,
+const BodyWrapper = styled.div({
+  label: "BodyWrapper",
+  flex: 1,
 });
 
 let hasRunOnce = false;
@@ -158,69 +113,58 @@ function App() {
       {showTerms && <Terms hideTerms={() => setShowTerms(false)} />}
       <AppWrapper darkMode={darkMode} showTerms={showTerms}>
         <Header>🩸🧮 Fat protein dose</Header>
-        <InputWrapper>
-          <MdInput
-            id={"fat"}
-            ref={fatInput}
-            inputmode={"numeric"}
-            type={"number"}
-            value={fat}
-            onChange={setFatInput}
-            placeholder={"enter grams"}
-            labelText={`Fat`}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <MdInput
-            id={"protein"}
-            ref={proteinInput}
-            inputmode={"numeric"}
-            type={"number"}
-            value={protein}
-            onChange={setProteinInput}
-            placeholder={"enter grams"}
-            labelText={`Protein`}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <MdInput
-            id={"icr"}
-            ref={icrInput}
-            inputmode={"numeric"}
-            type={"number"}
-            value={icr}
-            onChange={setIcrInput}
-            placeholder={"1 unit per"}
-            labelText={`ICR`}
-          />
-        </InputWrapper>
 
-        <ResultsSectionWrapper
-          hasRunOnce={hasRunOnce}
-          allInputsHaveData={allInputsHaveData}
-        >
-          <OutputText darkMode={darkMode}>
-            FPU<OutputValue>{fatProteinUnit}</OutputValue>
-          </OutputText>
-          <OutputText darkMode={darkMode}>
-            ckal<OutputValue>{ckal}</OutputValue>
-          </OutputText>
-          <OutputText darkMode={darkMode}>
-            Carb Convertion<OutputValue>{carbConversion}</OutputValue>
-          </OutputText>
-          <OutputText darkMode={darkMode}>
-            Insulin Dose<OutputValue>{insulinDose}</OutputValue>
-          </OutputText>
-          <OutputText darkMode={darkMode}>
-            Duration<OutputValue>{duration}</OutputValue>
-          </OutputText>
-
+        <BodyWrapper>
           <InputWrapper>
-            <Button onClick={clearInputs} darkMode={darkMode}>
-              Clear
-            </Button>
+            <MdInput
+              id={"fat"}
+              ref={fatInput}
+              inputmode={"numeric"}
+              type={"number"}
+              value={fat}
+              onChange={setFatInput}
+              placeholder={"enter grams"}
+              labelText={`Fat`}
+            />
           </InputWrapper>
-        </ResultsSectionWrapper>
+          <InputWrapper>
+            <MdInput
+              id={"protein"}
+              ref={proteinInput}
+              inputmode={"numeric"}
+              type={"number"}
+              value={protein}
+              onChange={setProteinInput}
+              placeholder={"enter grams"}
+              labelText={`Protein`}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <MdInput
+              id={"icr"}
+              ref={icrInput}
+              inputmode={"numeric"}
+              type={"number"}
+              value={icr}
+              onChange={setIcrInput}
+              placeholder={"1 unit per"}
+              labelText={`ICR`}
+            />
+          </InputWrapper>
+
+          <ResultsViewer
+            darkMode={darkMode}
+            hasRunOnce={hasRunOnce}
+            allInputsHaveData={allInputsHaveData}
+            clearInputs={clearInputs}
+            // derived values
+            fatProteinUnit={fatProteinUnit}
+            ckal={ckal}
+            carbConversion={carbConversion}
+            insulinDose={insulinDose}
+            duration={duration}
+          />
+        </BodyWrapper>
 
         <div style={{ textAlign: "center" }}>
           <ButtonLink
