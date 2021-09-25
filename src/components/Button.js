@@ -13,6 +13,10 @@ export const Button = styled.button(({ darkMode }) => {
     cursor: "pointer",
     "&:active": {
       transform: "translateY(2px)",
+      opacity: "0.6",
+    },
+    "&:hover": {
+      opacity: "0.6",
     },
   };
 
