@@ -9,7 +9,7 @@ import {
 } from "./business-logic";
 // import useDarkMode from "use-dark-mode";
 import { MdInput } from "./components/MdInput";
-import { Button } from "./components/Button";
+// import { Button } from "./components/Button";
 import { ButtonLink } from "./components/ButtonLink";
 import { InputWrapper } from "./components/InputWrapper";
 import { ResultsViewer } from "./components/Results";
@@ -24,10 +24,6 @@ const ViewWrapper = styled.div({
   left: 0,
   right: 0,
   position: "absolute",
-  // //
-  // display: "flex",
-  // minHeight: "100vh",
-  // flexDirection: "column",
 });
 
 const AppWrapper = styled.div(({ darkMode, showTerms }) => {
@@ -41,6 +37,10 @@ const AppWrapper = styled.div(({ darkMode, showTerms }) => {
     left: 0,
     right: 0,
     bottom: 0,
+    // //
+    display: "flex",
+    minHeight: "100vh",
+    flexDirection: "column",
   };
 
   if (darkMode) {
