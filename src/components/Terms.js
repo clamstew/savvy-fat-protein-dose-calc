@@ -8,7 +8,6 @@ const TermsWrapper = styled.div({
   left: 0,
   right: 0,
   zIndex: 10,
-  background: "black",
   color: "white",
 });
 

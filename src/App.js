@@ -16,9 +16,11 @@ import { ResultsViewer } from "./components/Results";
 // modals
 import { Terms } from "./components/Terms";
 
+import logo from "./assets/logo192.png";
+
 const ViewWrapper = styled.div({
   label: "ViewWrapper",
-  background: "black",
+  background: "rgb(46, 46, 46)",
   top: 0,
   bottom: 0,
   left: 0,
@@ -45,7 +47,7 @@ const AppWrapper = styled.div(({ darkMode, showTerms }) => {
 
   if (darkMode) {
     styles.color = "#FFF";
-    styles.backgroundColor = "#000";
+    styles.backgroundColor = "rgb(46, 46, 46)";
   }
 
   if (showTerms) {
@@ -61,6 +63,12 @@ const Header = styled.div({
   fontSize: 24,
   fontWeight: "bold",
   textAlign: "center",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  "& img": {
+    marginRight: 6,
+  },
 });
 
 const BodyWrapper = styled.div({
@@ -117,7 +125,9 @@ function App() {
     <ViewWrapper>
       {showTerms && <Terms hideTerms={() => setShowTerms(false)} />}
       <AppWrapper darkMode={darkMode} showTerms={showTerms}>
-        <Header>🩸🧮 Fat protein dose</Header>
+        <Header>
+          <img src={logo} style={{ height: 40 }} alt="Logo" /> Fat protein dose
+        </Header>
 
         <BodyWrapper>
           <InputWrapper>
