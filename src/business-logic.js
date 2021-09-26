@@ -9,7 +9,7 @@ export const calcFatProteinUnit = (fat, protein) => {
   if (fat <= 0) return "";
 
   return fat * 9 + protein * 4;
-}
+};
 
 // [B7] =ARRAY_CONSTRAIN(
 //         ARRAYFORMULA(
@@ -24,7 +24,8 @@ export const calcCKal = (fatProteinUnit) => {
 
   if (fatProteinUnit > 0) {
     // needs to round to 1 decimal place
-    return Math.round(fatProteinUnit / 100).toFixed(1);
+    // return Math.round(fatProteinUnit / 100).toFixed(1);
+    return Number((fatProteinUnit / 100).toFixed(1));
   }
 
   return "";
@@ -63,7 +64,8 @@ export const calcInsulinDose = (irc, carbConversion) => {
 
   if (irc > 0 && carbConversion > 0) {
     // needs to round to 1 decimal place
-    return Math.round(carbConversion / irc).toFixed(1);
+    // return Math.round(carbConversion / irc).toFixed(1);
+    return Number((carbConversion / irc).toFixed(1));
   }
 
   return "";
