@@ -68,6 +68,11 @@ const BodyWrapper = styled.div({
   flex: 1,
 });
 
+const FooterWrapper = styled.div({
+  textAlign: "center",
+  height: 40,
+});
+
 let hasRunOnce = false;
 
 function App() {
@@ -166,14 +171,14 @@ function App() {
           />
         </BodyWrapper>
 
-        <div style={{ textAlign: "center" }}>
+        <FooterWrapper>
           <ButtonLink
             style={{ fontSize: 9 }}
             onClick={() => setShowTerms(true)}
           >
             Terms & Conditions
           </ButtonLink>
-        </div>
+        </FooterWrapper>
       </AppWrapper>
     </ViewWrapper>
   );
