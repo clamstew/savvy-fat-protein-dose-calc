@@ -7,9 +7,7 @@ import {
   calcInsulinDose,
   calcDuration,
 } from "./business-logic";
-// import useDarkMode from "use-dark-mode";
 import { MdInput } from "./components/MdInput";
-// import { Button } from "./components/Button";
 import { ButtonLink } from "./components/ButtonLink";
 import { InputWrapper } from "./components/InputWrapper";
 import { ResultsViewer } from "./components/Results";
@@ -98,7 +96,7 @@ function App() {
   const [protein, setProtein] = useState("");
   const [icr, setIcr] = useState("");
 
-  // throttle results from fade out on load
+  // throttle results from fade out animation on load
   const allInputsHaveData = fat && protein && icr;
   if (allInputsHaveData) {
     hasRunOnce = true;
