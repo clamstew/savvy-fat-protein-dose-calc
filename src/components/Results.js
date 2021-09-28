@@ -78,7 +78,7 @@ export const ResultsViewer = ({
         ckal<OutputValue>{ckal}</OutputValue>
       </OutputText>
       <OutputText darkMode={darkMode}>
-        Carb Convertion<OutputValue>{carbConversion}</OutputValue>
+        Carb conversion<OutputValue>{carbConversion}</OutputValue>
       </OutputText>
       <OutputText darkMode={darkMode}>
         Insulin Dose<OutputValue>{insulinDose}</OutputValue>
