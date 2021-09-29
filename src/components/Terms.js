@@ -78,13 +78,14 @@ export function Terms({ hideTerms }) {
           reload/refresh. Additionally, the fat-protein.netlify.app website does
           not make any attempt to transmit your data to any other client or
           server, and it's reasonable to believe the data will stay only on your
-          computing device. However, enter data into the fat-protein.netlify.app
-          website at your own risk, as there is no warranty for this site - see
-          further disclaimer below - and websites on the internet can be
-          compromised through various exploits. We believe the user is likely as
-          secure as a user typically can be on a public website, when https is
-          being used, but that assertion is subject to change at any time, and
-          without notice.
+          computing device under normal operating conditions and if the website
+          security is not compromised. However, enter data into the
+          fat-protein.netlify.app website at your own risk, as there is no
+          warranty for this site - see further disclaimer below - and websites
+          on the internet can be compromised through various exploits. We
+          believe the user is likely as secure as a user typically can be on a
+          public website, when https is being used, but that assertion is
+          subject to change at any time, and without notice.
         </p>
 
         <p>
