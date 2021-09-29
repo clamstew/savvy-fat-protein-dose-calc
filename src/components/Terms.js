@@ -16,6 +16,19 @@ const TermsInnerWrapper = styled.div({
   maxWidth: 500,
 });
 
+const Link = styled.a({
+  color: "white",
+  "&:visited": {
+    color: "white",
+  },
+  "&:hover": {
+    color: "white",
+  },
+  "&:active": {
+    color: "white",
+  },
+});
+
 export function Terms({ hideTerms }) {
   return (
     <TermsWrapper>
@@ -31,13 +44,14 @@ export function Terms({ hideTerms }) {
 
         <p>
           If you are curious about the calculations that the javascript is
-          running on the input data, please visit
-          <a
+          running on the input data, please visit{" "}
+          <Link
             href="https://github.com/clamstew/savvy-fat-protein-dose-calc/blob/main/src/business-logic.js"
             rel="nofollow"
+            target="_blank"
           >
             the business-logic javascript
-          </a>
+          </Link>{" "}
           in the open-sourced version of the fat-protein.netlify.app website's
           source code. This is not a guareentee that these calculations are
           accurate or even a good way to calculate the results being shown.
