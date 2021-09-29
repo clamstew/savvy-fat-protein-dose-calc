@@ -1,3 +1,3 @@
 # Fat Protein Dose Calcutor
 
-code for fat-protein.netlify.com
+code for https://fat-protein.netlify.app/
