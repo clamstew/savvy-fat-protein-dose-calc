@@ -30,6 +30,23 @@ export function Terms({ hideTerms }) {
         </p>
 
         <p>
+          If you are curious about the calculations that the javascript is
+          running on the input data, please visit
+          <a
+            href="https://github.com/clamstew/savvy-fat-protein-dose-calc/blob/main/src/business-logic.js"
+            rel="nofollow"
+          >
+            the business-logic javascript
+          </a>
+          in the open-sourced version of the fat-protein.netlify.app website's
+          source code. This is not a guareentee that these calculations are
+          accurate or even a good way to calculate the results being shown.
+          However, the company can show you the calculation methods at this code
+          repository, so you can see how these outputs are likely being
+          calculated.
+        </p>
+
+        <p>
           The fat-protein.netlify.app website may contain links to third party
           websites which are not under the control of fat-protein.netlify.app.
           These links do not indicate explicit or implicit any endorsement,
@@ -37,6 +54,18 @@ export function Terms({ hideTerms }) {
           or the products and services provided on them. Any use of or access to
           those third party websites or their products and services is solely at
           your own risk.
+        </p>
+
+        <p>
+          The fat-protein.netlify.app website does not store your data outside
+          of the html inputs, which are also stored in temporary memory in
+          javascript for calculations and results rendering. However, enter data
+          into the fat-protein.netlify.app website at your own risk, as there is
+          no warranty for this site - see further disclaimer below - and
+          websites on the internet can be compromised through various exploits.
+          We believe the user is likely secure as you can be on a public
+          website, when https is being used, but that assertion is subject to
+          change at any time, and without notice.
         </p>
 
         <p>
