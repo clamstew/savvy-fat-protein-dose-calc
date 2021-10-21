@@ -76,7 +76,11 @@ const BodyWrapper = styled.div({
 
 const FooterWrapper = styled.div({
   textAlign: "center",
-  height: 40,
+  height: 50,
+});
+
+const ObviousDisclaimer = styled.div({
+  fontSize: 9,
 });
 
 let hasRunOnce = false;
@@ -180,6 +184,11 @@ function App() {
         </BodyWrapper>
 
         <FooterWrapper>
+          <ObviousDisclaimer>
+            Use this site and its output at your own risk.
+            <br />
+            This is not medical advice.
+          </ObviousDisclaimer>
           <ButtonLink
             style={{ fontSize: 9 }}
             onClick={() => setShowTerms(true)}
